@@ -43,6 +43,10 @@ export class ManagerApprovalList implements OnInit {
   displayedColumns = [
     'title',
     'department',
+    'amount',
+    'EventName',
+    'EventDate',
+    'sponsorshipTypeName',
     'actions'
   ];
 

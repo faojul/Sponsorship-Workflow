@@ -30,6 +30,9 @@ export class RequestList implements OnInit {
     'department',
     'status',
     'amount',
+    'EventName',
+    'EventDate',
+    'sponsorshipTypeName',
     'actions'
   ];
 
