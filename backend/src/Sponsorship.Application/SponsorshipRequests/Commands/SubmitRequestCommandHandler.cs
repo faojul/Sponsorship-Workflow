@@ -38,7 +38,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Commands
 
             sponsorshipRequest.Status = SponsorshipRequestStatus.PendingManagerApproval;
 
-            sponsorshipRequest.WorkflowHistories.Add(
+            context.WorkflowHistories.Add(
                 new WorkflowHistory
                 {
                     Id = Guid.NewGuid(),

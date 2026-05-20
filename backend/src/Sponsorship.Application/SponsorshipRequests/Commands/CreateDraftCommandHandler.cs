@@ -25,7 +25,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Commands
                 Department = request.Department,
                 SponsorshipTypeId = request.SponsorshipTypeId,
                 EventName = request.EventName,
-                EventDate = request.EventDate,
+                EventDate = DateTime.SpecifyKind(request.EventDate, DateTimeKind.Utc),
                 RequestedAmount = request.RequestedAmount,
                 Purpose = request.Purpose,
                 ExpectedBusinessBenefit = request.ExpectedBusinessBenefit,

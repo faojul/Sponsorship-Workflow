@@ -9,5 +9,6 @@ namespace Sponsorship.Application.Abstractions
     public interface IIdentityService
     {
         Task<Result<LoginResponse>> GetTokenAsync(string email, string password);
+        Task<Dictionary<string, string>> GetUserNamesByIdsAsync(List<string> userIds, CancellationToken cancellationToken);
     }
 }

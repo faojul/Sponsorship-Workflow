@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Sponsorship.Application.Abstractions;
 using Sponsorship.Application.Abstractions.Authentication;
 using Sponsorship.Application.Auth.DTOs;
@@ -33,7 +34,7 @@ namespace Sponsorship.Infrastructure.Identity
             var passwordValid =
                 await _userManager.CheckPasswordAsync(
                     user, password);
-                            
+
             if (!passwordValid)
             {
                 return await Result<LoginResponse>.FailAsync((int)HttpStatusCode.Unauthorized, "Invalid User Name Or Password.");
@@ -48,13 +49,30 @@ namespace Sponsorship.Infrastructure.Identity
                     user.Email!,
                     roles);
 
-            return await Result<LoginResponse>.SuccessAsync((int)HttpStatusCode.OK, 
+            return await Result<LoginResponse>.SuccessAsync((int)HttpStatusCode.OK,
                 new LoginResponse
                 {
                     Token = token,
                     Email = user.Email!,
                     Roles = roles
                 });
+        }
+
+        public async Task<Dictionary<string, string>> GetUserNamesByIdsAsync(List<string> userIds, CancellationToken cancellationToken)
+        {
+            if (userIds == null || !userIds.Any())
+            {
+                return [];
+            }
+
+            var userList = await _userManager.Users
+                .Where(user => userIds.Contains(user.Id)).ToListAsync(cancellationToken);
+
+            // 2. Safely build the dictionary in memory (no EF Core translation limits)
+            return userList.ToDictionary(
+                x => x.Id,
+                x => x.FullName ?? string.Empty
+            );
         }
     }
 }

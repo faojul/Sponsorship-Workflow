@@ -33,7 +33,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Commands
 
             sponsorshipRequest.Status = SponsorshipRequestStatus.PendingFinanceReview;
 
-            sponsorshipRequest.WorkflowHistories.Add(
+            context.WorkflowHistories.Add(
                 new WorkflowHistory
                 {
                     Id = Guid.NewGuid(),

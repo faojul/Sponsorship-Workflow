@@ -38,24 +38,25 @@ namespace Sponsorship.Application.SponsorshipRequests.Commands
 
             sponsorshipRequest.Status = SponsorshipRequestStatus.Cancelled;
 
-            sponsorshipRequest.WorkflowHistories.Add(
-                new WorkflowHistory
-                {
-                    Id = Guid.NewGuid(),
+            var history = new WorkflowHistory
+            {
+                Id = Guid.NewGuid(),
 
-                    SponsorshipRequestId =
+                SponsorshipRequestId =
                         sponsorshipRequest.Id,
 
-                    Action = "Cancelled",
+                Action = "Cancelled",
 
-                    PreviousStatus = previousStatus,
+                PreviousStatus = previousStatus,
 
-                    NewStatus =
+                NewStatus =
                         SponsorshipRequestStatus
                             .Cancelled,
 
-                    PerformedByUserId = currentUserService.UserId
-                });
+                PerformedByUserId = currentUserService.UserId
+            };
+
+            context.WorkflowHistories.Add(history);
 
             await context.SaveChangesAsync(
                 cancellationToken);
