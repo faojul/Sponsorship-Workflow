@@ -74,13 +74,7 @@
       </th>
 
       <td mat-cell *matCellDef="let item">
-
-        <button
-          mat-button
-          color="primary">
-
-          View
-        </button>
+@if (item.status === 'Draft') {
 <button
   mat-button
   color="accent"
@@ -88,6 +82,8 @@
 
   Submit
 </button>
+}
+@if (item.status === 'Draft' || item.status === 'PendingManagerApproval') {
 <button
   mat-button
   color="warn"
@@ -95,6 +91,7 @@
 
   Cancel
 </button>
+}
       </td>
 
     </ng-container>

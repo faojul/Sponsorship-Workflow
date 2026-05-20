@@ -22,6 +22,7 @@ from '../../services/sponsorship-request';
 import { SponsorshipTypeService }
 from '../../../sponsorship-types/services/sponsorship-type';
 import { AuthService } from '../../../../core/auth/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-create-request',
   imports: [
@@ -44,6 +45,7 @@ export class CreateRequest implements OnInit {
   private requestService = inject(SponsorshipRequestService);
   private typeService = inject(SponsorshipTypeService);
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
   sponsorshipTypes: any[] = [];
   
   form = this.fb.group({
@@ -88,9 +90,26 @@ export class CreateRequest implements OnInit {
 
     this.requestService
       .createDraft(this.form.value)
-      .subscribe(() => {
-
+      .subscribe( {
+next: () => {
+        // Success case
+        this.snackBar.open('Request submitted successfully.', 'Close', { duration: 3000 });
         this.router.navigate(['/requests']);
+      },
+      error: (err) => {
+        // Error case: Safeguard against missing array properties or network failures
+        const errorMessages = err?.error?.messages || err?.messages;
+        const displayMessage = errorMessages && errorMessages.length > 0 
+          ? errorMessages[0] 
+          : 'An unexpected error occurred.';
+
+        // 2. Show the backend string directly inside the toast
+        this.snackBar.open(displayMessage, 'Close', {
+          duration: 5000,
+          panelClass: ['error-snackbar'] // Optional styling class
+        });
+      }
+        
       });
   }
 

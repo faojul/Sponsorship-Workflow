@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   OnInit
 }
@@ -37,7 +38,8 @@ export class WorkflowHistory implements OnInit {
       ActivatedRoute,
 
     private requestService:
-      SponsorshipRequestService
+      SponsorshipRequestService,
+      private cdr: ChangeDetectorRef
   ) {
 
   }
@@ -54,6 +56,7 @@ export class WorkflowHistory implements OnInit {
         this.history =
           (response as any).data ??
           response;
+          this.cdr.detectChanges();
       });
   }
 }
