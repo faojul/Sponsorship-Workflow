@@ -1,62 +1,81 @@
 <div class="dashboard-grid">
-@if (authService.hasRole('Requestor')) {
-  <mat-card>
-    <mat-card-title>
-      My Requests
-    </mat-card-title>
 
-    <mat-card-content>
-      Manage sponsorship requests
-    </mat-card-content>
-  </mat-card>
-}
+  <!-- Requestor Role Card -->
+  @if (authService.hasRole('Requestor')) {
+    <mat-card class="dashboard-card" tabindex="0">
+      <a routerLink="/requests" class="card-link">
+        <mat-card-header>
+          <mat-card-title>My Requests</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Manage sponsorship requests</p>
+        </mat-card-content>
+      </a>
+    </mat-card>
+
+    <mat-card class="dashboard-card" tabindex="0">
+      <a routerLink="/requests/create" class="card-link">
+        <mat-card-header>
+          <mat-card-title>Create Request</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Submit a new sponsorship proposal</p>
+        </mat-card-content>
+      </a>
+    </mat-card>
+  }
+
+  <!-- Manager Role Card -->
   @if (authService.hasRole('Manager')) {
-
-    <mat-card>
-
-      <mat-card-title>
-        Pending Manager Reviews
-      </mat-card-title>
-
-      <mat-card-content>
-        Review submitted requests
-      </mat-card-content>
-
+    <mat-card class="dashboard-card" tabindex="0">
+      <a routerLink="/manager-approvals" class="card-link">
+        <mat-card-header>
+          <mat-card-title>Pending Manager Reviews</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Review submitted requests</p>
+        </mat-card-content>
+      </a>
     </mat-card>
   }
 
+  <!-- Finance Admin Role Card -->
   @if (authService.hasRole('FinanceAdmin')) {
-
-    <mat-card>
-
-      <mat-card-title>
-        Pending Finance Reviews
-      </mat-card-title>
-
-      <mat-card-content>
-        Final sponsorship approval
-      </mat-card-content>
-
+    <mat-card class="dashboard-card" tabindex="0">
+      <a routerLink="/finance-approvals" class="card-link">
+        <mat-card-header>
+          <mat-card-title>Pending Finance Reviews</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Final sponsorship approval</p>
+        </mat-card-content>
+      </a>
     </mat-card>
   }
 
-@if (
-  authService.hasRole('SystemAdmin')
-) {
+  <!-- System Admin Role Cards -->
+  @if (authService.hasRole('SystemAdmin')) {
+    <mat-card class="dashboard-card admin-card" tabindex="0">
+      <a routerLink="/admin/requests" class="card-link">
+        <mat-card-header>
+          <mat-card-title>All Requests</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>View and manage all system-wide requests</p>
+        </mat-card-content>
+      </a>
+    </mat-card>
 
-  <a
-    mat-list-item
-    routerLink="/admin/requests">
-
-    All Requests
-  </a>
-
-  <a
-    mat-list-item
-    routerLink="/sponsorship-types">
-
-    Sponsorship Types
-  </a>
-}
+    <mat-card class="dashboard-card admin-card" tabindex="0">
+      <a routerLink="/sponsorship-types" class="card-link">
+        <mat-card-header>
+          <mat-card-title>Sponsorship Types</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Configure and update sponsorship tiers</p>
+        </mat-card-content>
+      </a>
+    </mat-card>
+  }
 
 </div>

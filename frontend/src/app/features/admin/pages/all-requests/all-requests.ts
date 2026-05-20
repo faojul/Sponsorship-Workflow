@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   OnInit
 }
@@ -58,7 +59,8 @@ export class AllRequests implements OnInit {
 
   constructor(
     private requestService:
-      SponsorshipRequestService
+      SponsorshipRequestService,
+      private cdr: ChangeDetectorRef
   ) {
 
   }
@@ -77,6 +79,8 @@ export class AllRequests implements OnInit {
         this.requests =
           (response as any).data ??
           response;
+          this.cdr.detectChanges();
       });
+      
   }
 }

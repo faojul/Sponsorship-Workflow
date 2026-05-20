@@ -4,6 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../auth/auth';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-main-layout',
@@ -11,7 +12,8 @@ import { AuthService } from '../../auth/auth';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    RouterModule
+    RouterModule,
+    MatButtonModule 
   ],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss'

@@ -53,6 +53,14 @@
       </p>
 
     </mat-card>
-  }
+  } @empty {
+  <!-- This renders automatically if the history array is null, undefined, or empty -->
+  <mat-card class="history-card empty-message">
+    <p>
+      <strong>No Workflow history for this item.</strong> <br>
+      <i>Draft items do not have any workflow. The workflow starts after submission.</i>
+    </p>
+  </mat-card>
+}
 
 </div>

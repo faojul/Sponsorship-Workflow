@@ -1,11 +1,61 @@
+// Main outermost page wrapper takes full screen real estate
 .layout-container {
   height: 100vh;
+  width: 100vw;
 }
 
-.page-content {
-  padding: 20px;
+// Elevated header to create depth over the background layout
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensures content separation */
+  padding: 0 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Keeps toolbar components layered cleanly */
+  z-index: 10;
+  
+  .system-title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
 }
 
+// Creates clean space to push things to opposite sides
 .toolbar-spacer {
-  flex: 1;
+  flex: 1 1 auto;
+}
+mat-sidenav {
+  width: 260px;
+}
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.logout-btn {
+  border: 1px solid rgb(58, 161, 168);
+  border-radius: 6px;
+
+  color: rgba(185, 15, 15, 0.842) !important;
+ background-color: #f8f9fa;
+  padding: 0 16px;
+  height: 38px;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: white;
+  }
+}
+
+// Global workspace layout container matching dashboard grid spacing
+.page-content {
+  background-color: #f8f9fa; // Soft material-neutral layout background tint
+  padding: 24px;
+  box-sizing: border-box;
+  min-height: calc(100vh - 64px); /* Fills screen space below a 64px toolbar */
 }

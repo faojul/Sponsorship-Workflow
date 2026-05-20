@@ -1,8 +1,55 @@
+/* Full-page grid layout container */
 .dashboard-grid {
   display: grid;
+  /* Automatically adjusts columns based on available space (minimum card width 300px) */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
-  grid-template-columns:
-    repeat(auto-fit, minmax(300px, 1fr));
+/* Base style for all dashboard click targets */
+.dashboard-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensures all cards in a row have identical height */
+  min-height: 140px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  gap: 20px;
+/* Elevates card and subtly shifts it up on user interaction */
+.dashboard-card:hover, 
+.dashboard-card:focus-visible {
+  outline: none;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* Optional styling tweak to distinguish admin tasks visually */
+.admin-card {
+  border-left: 4px solid #3f51b5; /* Angular Material default primary indigo tint */
+}
+
+/* Typography polish inside content blocks */
+mat-card-content p {
+  color: rgba(0, 0, 0, 0.6);
+  margin: 8px 0 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
