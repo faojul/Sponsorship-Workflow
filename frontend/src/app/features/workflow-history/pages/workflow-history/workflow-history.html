@@ -1,0 +1,58 @@
+<h2>Workflow History</h2>
+
+<div
+  class="history-container">
+
+  @for (
+    item of history;
+    track item.id
+  ) {
+
+    <mat-card class="history-card">
+
+      <p>
+
+        <strong>Action:</strong>
+        {{ item.action }}
+
+      </p>
+
+      <p>
+
+        <strong>From Status:</strong>
+        {{ item.previousStatus }}
+
+      </p>
+
+      <p>
+
+        <strong>To Status:</strong>
+        {{ item.newStatus }}
+
+      </p>
+
+      <p>
+
+        <strong>Remarks:</strong>
+        {{ item.remarks }}
+
+      </p>
+
+      <p>
+
+        <strong>Performed By:</strong>
+        {{ item.performedBy }}
+
+      </p>
+
+      <p>
+
+        <strong>Date:</strong>
+        {{ item.createdAtUtc }}
+
+      </p>
+
+    </mat-card>
+  }
+
+</div>

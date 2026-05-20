@@ -1,0 +1,70 @@
+<div class="login-container">
+
+  <mat-card>
+
+    <mat-card-title>
+      Sponsorship Workflow Login
+    </mat-card-title>
+
+    <mat-card class="seed-card">
+
+  <h3>Test Accounts</h3>
+
+  <p>
+    <strong>Requestor</strong><br>
+    requestor@test.com<br>
+    Test123!
+  </p>
+
+  <p>
+    <strong>Manager</strong><br>
+    manager@test.com<br>
+    Test123!
+  </p>
+
+  <p>
+    <strong>Finance Admin</strong><br>
+    finance@test.com<br>
+    Test123!
+  </p>
+
+  <p>
+    <strong>System Admin</strong><br>
+    admin@test.com<br>
+    Test123!
+  </p>
+
+</mat-card>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email</mat-label>
+
+        <input
+          matInput
+          formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+
+        <input
+          matInput
+          type="password"
+          formControlName="password">
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width">
+
+        Login
+      </button>
+
+    </form>
+
+  </mat-card>
+
+</div>

@@ -1,0 +1,62 @@
+<div class="dashboard-grid">
+@if (authService.hasRole('Requestor')) {
+  <mat-card>
+    <mat-card-title>
+      My Requests
+    </mat-card-title>
+
+    <mat-card-content>
+      Manage sponsorship requests
+    </mat-card-content>
+  </mat-card>
+}
+  @if (authService.hasRole('Manager')) {
+
+    <mat-card>
+
+      <mat-card-title>
+        Pending Manager Reviews
+      </mat-card-title>
+
+      <mat-card-content>
+        Review submitted requests
+      </mat-card-content>
+
+    </mat-card>
+  }
+
+  @if (authService.hasRole('FinanceAdmin')) {
+
+    <mat-card>
+
+      <mat-card-title>
+        Pending Finance Reviews
+      </mat-card-title>
+
+      <mat-card-content>
+        Final sponsorship approval
+      </mat-card-content>
+
+    </mat-card>
+  }
+
+@if (
+  authService.hasRole('SystemAdmin')
+) {
+
+  <a
+    mat-list-item
+    routerLink="/admin/requests">
+
+    All Requests
+  </a>
+
+  <a
+    mat-list-item
+    routerLink="/sponsorship-types">
+
+    Sponsorship Types
+  </a>
+}
+
+</div>

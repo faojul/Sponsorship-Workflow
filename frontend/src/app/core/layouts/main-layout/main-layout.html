@@ -1,0 +1,82 @@
+<mat-sidenav-container class="layout-container">
+
+  <mat-sidenav mode="side" opened>
+<mat-nav-list>
+
+  <a mat-list-item routerLink="/dashboard">
+    Dashboard
+  </a>
+  @if (
+    authService.hasRole('Requestor')
+  ) {
+  <a mat-list-item routerLink="/requests">
+    My Requests
+  </a>
+  }
+  @if (
+    authService.hasRole('Manager')
+  ) {
+
+    <a
+      mat-list-item
+      routerLink="/manager-approvals">
+
+      Manager Approvals
+    </a>
+  }
+
+  @if (
+    authService.hasRole('FinanceAdmin')
+  ) {
+
+    <a
+      mat-list-item
+      routerLink="/finance-approvals">
+
+      Finance Approvals
+    </a>
+  }
+
+@if (
+  authService.hasRole('SystemAdmin')
+) {
+
+  <a
+    mat-list-item
+    routerLink="/admin/requests">
+
+    All Requests
+  </a>
+
+  <a
+    mat-list-item
+    routerLink="/sponsorship-types">
+
+    Sponsorship Types
+  </a>
+}
+
+</mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <mat-toolbar color="primary">
+      Sponsorship Workflow System
+      <span class="toolbar-spacer"></span>
+
+        <button
+        mat-button
+        (click)="logout()">
+
+        Logout
+        </button>
+    </mat-toolbar>
+
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -1,0 +1,96 @@
+<mat-card>
+
+  <h2>All Sponsorship Requests</h2>
+
+  <table
+    mat-table
+    [dataSource]="requests"
+    class="full-width-table">
+
+    <ng-container matColumnDef="title">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Title
+      </th>
+
+      <td mat-cell *matCellDef="let item">
+        {{ item.title }}
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Department
+      </th>
+
+      <td mat-cell *matCellDef="let item">
+        {{ item.department }}
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Status
+      </th>
+
+      <td mat-cell *matCellDef="let item">
+        {{ item.status }}
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Amount
+      </th>
+
+      <td mat-cell *matCellDef="let item">
+        {{ item.requestedAmount }}
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="workflow">
+
+      <th mat-header-cell *matHeaderCellDef>
+        Workflow
+      </th>
+
+      <td mat-cell *matCellDef="let item">
+
+        <button
+          mat-button
+          color="primary"
+          [routerLink]="[
+            '/workflow-history',
+            item.id
+          ]">
+
+          View Workflow
+        </button>
+
+      </td>
+
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns">
+    </tr>
+
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: displayedColumns;
+      ">
+    </tr>
+
+  </table>
+
+</mat-card>
