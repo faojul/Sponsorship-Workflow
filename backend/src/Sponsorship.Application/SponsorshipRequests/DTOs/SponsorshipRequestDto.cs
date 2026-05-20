@@ -23,7 +23,7 @@ namespace Sponsorship.Application.SponsorshipRequests.DTOs
 
         public string Purpose { get; set; } = default!;
 
-        public SponsorshipRequestStatus Status { get; set; }
+        public string? Status { get; set; }
 
         public DateTime CreatedAtUtc { get; set; }
     }

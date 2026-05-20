@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sponsorship.Application.SponsorshipTypes.Commands;
 using Sponsorship.Application.SponsorshipTypes.DTOs;
 using Sponsorship.Application.SponsorshipTypes.Queries;
+using System.Windows.Input;
 
 namespace Sponsorship.Api.Controllers
 {
@@ -76,7 +77,7 @@ namespace Sponsorship.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateSponsorshipTypeCommand command, CancellationToken cancellationToken)
         {
-            if (id != command.Id) return BadRequest("Route ID and Body ID mismatch.");
+            command.Id = id; // Ensure the command's ID is set to the route parameter for consistency
 
             var result = await mediator.Send(command, cancellationToken);
             return StatusCode(result.StatusCode, result);

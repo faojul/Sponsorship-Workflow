@@ -97,7 +97,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Queries
                             EventDate = x.EventDate,
                             RequestedAmount = x.RequestedAmount,
                             Purpose = x.Purpose,
-                            Status = x.Status,
+                            Status = x.Status.ToString(),
                             CreatedAtUtc = x.CreatedAtUtc
                         })
                     .ToListAsync(cancellationToken);

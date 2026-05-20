@@ -9,7 +9,11 @@ using System.Text;
 
 namespace Sponsorship.Application.SponsorshipTypes.Commands
 {
-    public record UpdateSponsorshipTypeCommand(Guid Id, string Name) : IRequest<Result<bool>>;
+    public class UpdateSponsorshipTypeCommand : IRequest<Result<bool>>
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = default!;
+    }
 
     public class UpdateSponsorshipTypeCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateSponsorshipTypeCommand, Result<bool>>
     {
