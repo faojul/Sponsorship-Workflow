@@ -17,8 +17,7 @@ namespace Sponsorship.Infrastructure.Extensions
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services, IConfiguration configuration, string myAllowSpecificOrigins)
         {
             services.AddHttpContextAccessor();
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -36,16 +35,16 @@ namespace Sponsorship.Infrastructure.Extensions
                 .AddDefaultTokenProviders();
 
 
-            ConfigureJWTToken(services, configuration);
+            services.ConfigureJWTToken(configuration);
             services.AddAuthorization();
-
+            services.AddCorsPolicy(myAllowSpecificOrigins);
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IIdentityService, IdentityService>();
 
             return services;
         }
 
-        private static IServiceCollection ConfigureJWTToken(IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection ConfigureJWTToken(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JwtOptions>(
                 configuration.GetSection(JwtOptions.SectionName));
@@ -86,6 +85,22 @@ namespace Sponsorship.Infrastructure.Extensions
                 JwtTokenGenerator>();
 
             return services;
+        }
+
+        private static IServiceCollection AddCorsPolicy(this IServiceCollection services, string myAllowSpecificOrigins)
+        {
+
+            return services.AddCors(opt =>
+            {
+                opt.AddPolicy(myAllowSpecificOrigins, policy =>
+                {
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .WithOrigins("http://localhost:4200");
+                });
+            });
         }
     }
 }

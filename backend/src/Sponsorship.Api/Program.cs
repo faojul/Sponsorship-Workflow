@@ -20,18 +20,22 @@ namespace Sponsorship.Api
             var config = new ConfigurationBuilder().AddUserSecrets<Program>()
                 .AddJsonFile(appSettingsName, optional: false, reloadOnChange: true)
                 .Build();
-            // Add services to the container.
 
+            // Add services to the container.
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            // Add services to the container.
             builder.Services.AddControllers();
             //// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             //builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddApplication();
             builder.Services.AddPresentation();
-            builder.Services.AddInfrastructure(config);
+            builder.Services.AddInfrastructure(config, MyAllowSpecificOrigins);
 
             var app = builder.Build();
 
+            app.UseCors(MyAllowSpecificOrigins);
             // Force HTTPS immediately for security
             app.UseHttpsRedirection();
             // Serve static files (if any)
