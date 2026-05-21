@@ -1,0 +1,16 @@
+[build]
+  # Direct Netlify to move inside the frontend folder before running commands
+  base = "frontend"
+  
+  # Tell Netlify how to compile your Angular 20 app
+  command = "npm run build"
+  
+  # Specify the build output folder. 
+  # In Angular 20, the default location is dist/[project-name]/browser
+  publish = "dist/frontend/browser"
+
+[[redirects]]
+  # This serves as a structural backup to ensure Netlify hooks the routing properly
+  from = "/*"
+  to = "/index.html"
+  status = 200
