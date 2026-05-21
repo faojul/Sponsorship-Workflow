@@ -9,6 +9,10 @@
   # In Angular 20, the default location is dist/[project-name]/browser
   publish = "dist/frontend/browser"
 
+# ADD THIS BLOCK BELOW
+[build.environment]
+  NPM_FLAGS = "--legacy-peer-deps"
+  
 [[redirects]]
   # This serves as a structural backup to ensure Netlify hooks the routing properly
   from = "/*"
