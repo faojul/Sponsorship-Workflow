@@ -19,6 +19,13 @@
       Sponsorship Workflow System
       <span class="toolbar-spacer"></span>
 
+        @if (authService.currentUser(); as user) {
+    <div class="user-info">
+      <span class="user-email">{{ user.email }}</span>
+      <span class="user-role">({{ user.roles.join(', ') }})</span>
+    </div>
+  }
+
         <button
         mat-button
         class="logout-btn"
