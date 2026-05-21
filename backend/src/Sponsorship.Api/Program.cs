@@ -41,12 +41,12 @@ namespace Sponsorship.Api
             // Serve static files (if any)
             app.UseStaticFiles();
 
-            if (app.Environment.IsDevelopment())
-            {
+            ///if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger();
 
                 app.UseSwaggerUI();
-            }
+            //}
 
             // Authenticate the request
             app.UseAuthentication();
