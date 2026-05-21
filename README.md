@@ -9,12 +9,19 @@ The system manages the full sponsorship approval lifecycle from request creation
 # Live Demo
 
 ## Frontend
-
-[Frontend URL Here]
+https://graceful-valkyrie-3fb4b1.netlify.app/login
 
 ## Backend Swagger
+https://sponsorship-workflow.onrender.com/swagger
 
-[Swagger URL Here]
+## GitHub Repository
+https://github.com/faojul/Sponsorship-Workflow
+
+> Note:
+> The backend is hosted on Render free tier.
+> On the very first visit, Render may take some time to spin up the server after inactivity.
+> Once initialized, the application responds instantly.
+> A loading indicator has been implemented in the frontend to handle backend cold starts gracefully.
 
 ---
 
@@ -22,7 +29,7 @@ The system manages the full sponsorship approval lifecycle from request creation
 
 This application was designed as an enterprise-style workflow management system where different organizational roles collaborate through a structured sponsorship approval process.
 
-The project demonstrates:
+The project demonstrates modern enterprise full-stack application development including:
 
 * enterprise backend architecture
 * scalable frontend structure
@@ -63,8 +70,10 @@ The project demonstrates:
 
 ## Deployment
 
-* Azure App Service
-* PostgreSQL (Cloud Hosted)
+* Frontend Hosting: Netlify (Free Tier)
+* Backend Hosting: Render (Free Tier)
+* Database Hosting: Neon PostgreSQL (Free Tier)
+* Backend Deployment: Dockerized ASP.NET Core Application
 
 ---
 
@@ -392,6 +401,43 @@ The application automatically seeds:
 | [admin@test.com](mailto:admin@test.com)         | Test123! | SystemAdmin  |
 
 ---
+# Production Deployment Architecture
+
+The application is deployed using a fully cloud-hosted architecture.
+
+## Hosting Providers
+
+| Service | Platform |
+|---|---|
+| Frontend | Netlify |
+| Backend API | Render |
+| Database | Neon PostgreSQL |
+
+## Deployment Details
+
+### Frontend
+- Angular 20 production build deployed to Netlify
+- SPA route handling configured
+- Environment-based API configuration enabled
+
+### Backend
+- ASP.NET Core (.NET 10) API deployed on Render
+- Dockerized deployment using multi-stage Docker build
+- Environment variables configured securely
+- Swagger enabled for production testing
+- PostgreSQL cloud connection configured via environment variables
+
+### Database
+- PostgreSQL hosted on Neon cloud platform
+- EF Core migrations applied automatically during deployment
+
+## Production URLs
+Frontend:
+https://graceful-valkyrie-3fb4b1.netlify.app/login
+
+Swagger API:
+https://sponsorship-workflow.onrender.com/swagger
+
 
 # Running the Backend Locally
 
@@ -416,7 +462,6 @@ appsettings.json
   "DefaultConnection": "Host=localhost;Port=5432;Database=SponsorshipDb;Username=postgres;Password=yourpassword"
 }
 ```
-
 ---
 
 ## Apply Migrations
@@ -432,6 +477,28 @@ dotnet ef database update
 ```bash
 dotnet run
 ```
+
+# Running via Docker
+
+## Prerequisites
+
+Docker Desktop
+
+## Build Docker Image
+
+```bash
+docker build -t sponsorship-api .
+```
+Run Docker Container
+
+```bash
+docker run -p 8080:8080 sponsorship-api
+```
+## Docker Notes
+- Multi-stage Docker build implemented
+- Production-ready ASP.NET Core container setup
+- Environment variable support enabled
+- Suitable for cloud deployment platforms like Render
 
 ---
 
@@ -587,12 +654,12 @@ Implemented Angular route guards and role-based menu rendering using JWT claims.
 # Future Improvements
 
 * Refresh token implementation
-* Docker support
 * CI/CD pipeline
 * Unit & integration tests
 * Email notifications
 * Advanced analytics dashboard
 * File attachment support
+* Caching & performance optimization
 * Audit logging
 * Export reports
 
@@ -601,26 +668,35 @@ Implemented Angular route guards and role-based menu rendering using JWT claims.
 # Project Status
 
 ## Backend
-
 Completed
 
 ## Frontend
-
 Completed
 
 ## Workflow
-
 Completed
 
 ## Deployment
+Completed
 
-In Progress
+## Cloud Hosting
+Completed
+
+## Dockerization
+Completed
 
 ---
 
 # Author
 
 Faojul Ahsan
-
 Senior Software Developer
-ASP.NET Core | Angular | PostgreSQL | Clean Architecture
+
+Backend Focus:
+ASP.NET Core | Clean Architecture | CQRS | PostgreSQL
+
+Frontend:
+Angular 20 | Angular Material | Standalone Components
+
+Cloud & Deployment:
+Docker | Render | Netlify | Neon PostgreSQL
