@@ -11,7 +11,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Queries
         string? Status,
         string? SearchTerm,
         int PageNumber = 1,
-        int PageSize = 10
+        int PageSize = 100
         )
     : IRequest<PaginatedResult<SponsorshipRequestDto>>;
 }
