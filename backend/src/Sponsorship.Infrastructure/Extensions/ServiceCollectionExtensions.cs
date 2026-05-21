@@ -98,7 +98,9 @@ namespace Sponsorship.Infrastructure.Extensions
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials()
-                        .WithOrigins("http://localhost:4200");
+                        .WithOrigins("http://localhost:4200",
+                        "https://graceful-valkyrie-3fb4b1.netlify.app"
+                        );
                 });
             });
         }

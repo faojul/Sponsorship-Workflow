@@ -11,17 +11,19 @@ namespace Sponsorship.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add User Secrets only when developing locally
+            // Load appsettings.json for local defaults
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            //  ONLY check User Secrets if running locally
             if (builder.Environment.IsDevelopment())
             {
                 builder.Configuration.AddUserSecrets<Program>();
             }
 
-            // Base configuration (Loads appsettings.json for local development)
-            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            // This overwrites the values from appsettings.json at runtime.
+            builder.Configuration.AddEnvironmentVariables();
 
-            // Bind everything to the native builder configuration instance
-            // This automatically pulls from appsettings.json locally AND environment variables on Render
+            // Bind config from the native builder instance
             var config = builder.Configuration;
 
             // Add services to the container.
