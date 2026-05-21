@@ -37,6 +37,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Commands
             var previousStatus = sponsorshipRequest.Status;
 
             sponsorshipRequest.Status = SponsorshipRequestStatus.Cancelled;
+            sponsorshipRequest.UpdatedAtUtc = DateTime.UtcNow;
 
             var history = new WorkflowHistory
             {

@@ -37,6 +37,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Commands
             var previousStatus = sponsorshipRequest.Status;
 
             sponsorshipRequest.Status = SponsorshipRequestStatus.PendingManagerApproval;
+            sponsorshipRequest.UpdatedAtUtc = DateTime.UtcNow;
 
             context.WorkflowHistories.Add(
                 new WorkflowHistory

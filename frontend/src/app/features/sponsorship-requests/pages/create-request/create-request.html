@@ -68,18 +68,22 @@
 
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+<mat-form-field appearance="outline">
+  <mat-label>Event Date</mat-label>
+  
+  <!-- Add [matDatepicker] directive to the input -->
+  <input 
+    matInput 
+    [matDatepicker]="picker" 
+    formControlName="eventDate">
+  
+  <!-- Add a toggle icon inside the form field -->
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  
+  <!-- Add the actual calendar popup element -->
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
 
-        <mat-label>
-          Event Date
-        </mat-label>
-
-        <input
-          matInput
-          type="date"
-          formControlName="eventDate">
-
-      </mat-form-field>
 
       <mat-form-field appearance="outline">
 

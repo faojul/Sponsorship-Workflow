@@ -5,7 +5,7 @@ import {
   Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { DatePipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule }
 from '@angular/material/datepicker';
-
+import { MatNativeDateModule } from '@angular/material/core';
 import { SponsorshipRequestService }
 from '../../services/sponsorship-request';
 
@@ -33,8 +33,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
+  providers: [DatePipe],
   templateUrl: './create-request.html',
   styleUrl: './create-request.scss',
 })

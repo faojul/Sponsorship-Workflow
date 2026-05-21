@@ -94,7 +94,7 @@ namespace Sponsorship.Application.SponsorshipRequests.Queries
                             Department = x.Department,
                             SponsorshipTypeName = x.SponsorshipType.Name,
                             EventName = x.EventName,
-                            EventDate = x.EventDate,
+                            EventDate = x.EventDate.Date,
                             RequestedAmount = x.RequestedAmount,
                             Purpose = x.Purpose,
                             Status = x.Status.ToString(),
