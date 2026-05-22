@@ -12,7 +12,7 @@ namespace Sponsorship.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Load appsettings.json for local defaults
-            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
 
             //  ONLY check User Secrets if running locally
             if (builder.Environment.IsDevelopment())
