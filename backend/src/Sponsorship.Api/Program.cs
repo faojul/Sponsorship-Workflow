@@ -59,7 +59,11 @@ namespace Sponsorship.Api
             // Authorize the authenticated request
             app.UseAuthorization();
 
-            app.MapGet("/healthCheckflow", () => Results.Ok("Healthy")).AllowAnonymous();
+            app.MapMethods(
+                "/healthCheckflow",
+                ["GET", "HEAD"],
+                () => Results.Ok("Healthy"))
+                .AllowAnonymous();
 
             // Run database migrations and seed data BEFORE mapping routes or running the app
             try
