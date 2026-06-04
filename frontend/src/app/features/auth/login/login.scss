@@ -26,11 +26,15 @@
   align-items: center; /* Vertical center */
   gap: 32px; /* Spacing between cards */
   padding: 24px;
+  flex-wrap: wrap;
 }
 
 .login-card, .seed-card {
-  width: 400px;
-  min-height: 320px; /* Optional: standardizes card heights */
+  width: 100%;
+  max-width: 400px;
+
+  min-height: 320px;
+
   box-sizing: border-box;
 }
 /* TARGETS ONLY THE CONTENT INSIDE THE SEED CARD */
