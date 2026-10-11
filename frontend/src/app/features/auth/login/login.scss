@@ -1,77 +1,202 @@
-/* Base page structural setup */
+/* Split screen: navy brand panel on the left, form on the right */
 .page-wrapper {
+  display: grid;
+  grid-template-columns: minmax(360px, 5fr) 7fr;
+  min-height: 100vh;
+  background: var(--wf-bg);
+}
+
+/* ---------- Brand panel ---------- */
+.brand-panel {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  box-sizing: border-box;
-  background-color: #f5f5f5; /* Subtle layout background color */
+  justify-content: space-between;
+  gap: 48px;
+  padding: 40px 48px;
+  background: var(--wf-navy-900);
+  color: #fff;
 }
 
-/* FIX: Forces Title to top, centered horizontally */
-.page-title {
-  text-align: center;
+.brand-panel .brand-name {
+  color: #fff;
+}
+
+.brand-headline {
+  margin: 0 0 32px;
+  max-width: 18ch;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* The three approval stages, joined by a vertical line */
+.stages {
+  position: relative;
   margin: 0;
-  padding: 32px 0 0 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: #333;
-  font-size: 28px;
-  font-weight: 500;
+  padding: 0;
+  list-style: none;
+  counter-reset: stage;
 }
 
-/* FIX: Centers the two cards perfectly in the remaining viewport space */
-.login-container {
-  flex: 1; /* Absorbs all remaining vertical space */
+.stages li {
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center; /* Vertical center */
-  gap: 32px; /* Spacing between cards */
-  padding: 24px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 0 24px 44px;
+  counter-increment: stage;
 }
 
-.login-card, .seed-card {
+.stages li:last-child {
+  padding-bottom: 0;
+}
+
+.stages li::before {
+  content: counter(stage);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--wf-blue-600);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.stages li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 32px;
+  bottom: 4px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.stages strong {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.stages span {
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.brand-note {
+  margin: 32px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- Form panel ---------- */
+.form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.form-wrap {
   width: 100%;
   max-width: 400px;
-
-  min-height: 320px;
-
-  box-sizing: border-box;
-}
-/* TARGETS ONLY THE CONTENT INSIDE THE SEED CARD */
-.seed-card h3 {
-  margin-left: 16px; /* Shifts the header right */
 }
 
-.seed-card p {
-  padding-left: 16px; /* Shifts the account text details right */
-  line-height: 1.6;
+.form-title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--wf-ink);
+}
+
+.form-sub {
+  margin: 4px 0 24px;
+  font-size: 14px;
+  color: var(--wf-muted);
+}
+
+/* The login form sits directly on the page, without a card frame */
+.login-card {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.full-width {
+  width: 100%;
   margin-bottom: 16px;
 }
-/* Full Screen Loading Overlay */
+
+.submit-btn {
+  height: 44px;
+  margin: 8px 0 0;
+  font-size: 15px;
+}
+
+/* ---------- Test accounts ---------- */
+.seed-card {
+  margin-top: 32px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+.seed-card h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wf-muted);
+}
+
+.seed-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.seed-list li {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--wf-border-soft);
+  font-size: 13px;
+  color: var(--wf-ink-2);
+}
+
+.seed-list strong {
+  font-weight: 500;
+  color: var(--wf-ink);
+}
+
+/* ---------- Loading overlay ---------- */
 .loading-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.45);
+  inset: 0;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  background-color: rgba(11, 31, 63, 0.55);
 }
 
-/* The notice box centered inside overlay */
 .server-start-notice {
-  background: white;
-  padding: 32px;
-  border-radius: 8px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   max-width: 360px;
+  padding: 32px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 28, 51, 0.2);
+  text-align: center;
 }
 
 .server-start-notice mat-spinner {
@@ -80,17 +205,40 @@
 
 .server-start-notice h3 {
   margin: 8px 0;
-  color: #222;
+  color: var(--wf-ink);
 }
 
 .server-start-notice p {
-  color: #555;
+  margin: 0;
   font-size: 14px;
   line-height: 1.5;
-  margin: 0;
+  color: var(--wf-muted);
 }
 
-.full-width {
-  width: 100%;
-  margin-bottom: 16px;
+/* ---------- Narrow screens: brand panel becomes a compact header ---------- */
+@media (max-width: 900px) {
+  .page-wrapper {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .brand-panel {
+    padding: 20px 24px;
+  }
+
+  .brand-copy {
+    display: none;
+  }
+
+  .form-panel {
+    align-items: flex-start;
+    padding-top: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .seed-list li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
 }

@@ -1,55 +1,83 @@
-/* Full-page grid layout container */
+/* Responsive grid of task tiles */
 .dashboard-grid {
   display: grid;
-  /* Automatically adjusts columns based on available space (minimum card width 280px) */
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  padding: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 16px;
 }
 
-/* Base style for all dashboard click targets */
+/* Each tile is one link; the whole surface is the click target */
 .dashboard-card {
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Ensures all cards in a row have identical height */
-  min-height: 140px;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 16px;
-  border-radius: 8px;
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 0.12s ease, background-color 0.12s ease;
 }
 
-/* Elevates card and subtly shifts it up on user interaction */
-.dashboard-card:hover, 
+.dashboard-card:hover {
+  border-color: var(--wf-blue-600);
+  background: var(--wf-blue-50);
+}
+
 .dashboard-card:focus-visible {
-  outline: none;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  outline: 2px solid var(--wf-blue-600);
+  outline-offset: -2px;
 }
 
-/* Optional styling tweak to distinguish admin tasks visually */
-.admin-card {
-  border-left: 4px solid #3f51b5; /* Angular Material default primary indigo tint */
+/* Keyboard focus on the inner link also highlights the tile */
+.dashboard-card:has(.card-link:focus-visible) {
+  outline: 2px solid var(--wf-blue-600);
+  outline-offset: -2px;
 }
 
-/* Typography polish inside content blocks */
-mat-card-content p {
-  color: rgba(0, 0, 0, 0.6);
-  margin: 8px 0 0 0;
-  font-size: 14px;
-  line-height: 1.4;
-}
 .card-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
   text-decoration: none;
   color: inherit;
+  outline: none;
+}
+
+.tile-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--wf-blue-50);
+  color: var(--wf-blue-600);
+}
+
+.dashboard-card:hover .tile-icon {
+  background: #fff;
+}
+
+.tile-body {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tile-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--wf-ink);
+}
+
+.tile-text {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--wf-muted);
+}
+
+.tile-chevron {
+  flex: none;
+  color: var(--wf-border-strong);
+}
+
+.dashboard-card:hover .tile-chevron {
+  color: var(--wf-blue-600);
 }

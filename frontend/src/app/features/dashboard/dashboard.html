@@ -1,26 +1,33 @@
+<header class="page-head">
+  <div>
+    <h1 class="page-title">Dashboard</h1>
+    <p class="page-sub">Tasks available for your role.</p>
+  </div>
+</header>
+
 <div class="dashboard-grid">
 
   <!-- Requestor Role Card -->
   @if (authService.hasRole('Requestor')) {
     <mat-card class="dashboard-card" tabindex="0">
       <a routerLink="/requests" class="card-link">
-        <mat-card-header>
-          <mat-card-title>My Requests</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Manage sponsorship requests</p>
-        </mat-card-content>
+        <span class="tile-icon"><span class="material-icons" aria-hidden="true">list_alt</span></span>
+        <span class="tile-body">
+          <span class="tile-title">My Requests</span>
+          <span class="tile-text">Manage sponsorship requests</span>
+        </span>
+        <span class="material-icons tile-chevron" aria-hidden="true">chevron_right</span>
       </a>
     </mat-card>
 
     <mat-card class="dashboard-card" tabindex="0">
       <a routerLink="/requests/create" class="card-link">
-        <mat-card-header>
-          <mat-card-title>Create Request</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Submit a new sponsorship proposal</p>
-        </mat-card-content>
+        <span class="tile-icon"><span class="material-icons" aria-hidden="true">note_add</span></span>
+        <span class="tile-body">
+          <span class="tile-title">Create Request</span>
+          <span class="tile-text">Submit a new sponsorship proposal</span>
+        </span>
+        <span class="material-icons tile-chevron" aria-hidden="true">chevron_right</span>
       </a>
     </mat-card>
   }
@@ -29,12 +36,12 @@
   @if (authService.hasRole('Manager')) {
     <mat-card class="dashboard-card" tabindex="0">
       <a routerLink="/manager-approvals" class="card-link">
-        <mat-card-header>
-          <mat-card-title>Pending Manager Reviews</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Review submitted requests</p>
-        </mat-card-content>
+        <span class="tile-icon"><span class="material-icons" aria-hidden="true">assignment_turned_in</span></span>
+        <span class="tile-body">
+          <span class="tile-title">Pending Manager Reviews</span>
+          <span class="tile-text">Review submitted requests</span>
+        </span>
+        <span class="material-icons tile-chevron" aria-hidden="true">chevron_right</span>
       </a>
     </mat-card>
   }
@@ -43,12 +50,12 @@
   @if (authService.hasRole('FinanceAdmin')) {
     <mat-card class="dashboard-card" tabindex="0">
       <a routerLink="/finance-approvals" class="card-link">
-        <mat-card-header>
-          <mat-card-title>Pending Finance Reviews</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Final sponsorship approval</p>
-        </mat-card-content>
+        <span class="tile-icon"><span class="material-icons" aria-hidden="true">account_balance</span></span>
+        <span class="tile-body">
+          <span class="tile-title">Pending Finance Reviews</span>
+          <span class="tile-text">Final sponsorship approval</span>
+        </span>
+        <span class="material-icons tile-chevron" aria-hidden="true">chevron_right</span>
       </a>
     </mat-card>
   }
@@ -57,23 +64,23 @@
   @if (authService.hasRole('SystemAdmin')) {
     <mat-card class="dashboard-card admin-card" tabindex="0">
       <a routerLink="/admin/requests" class="card-link">
-        <mat-card-header>
-          <mat-card-title>All Requests</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>View and manage all system-wide requests</p>
-        </mat-card-content>
+        <span class="tile-icon"><span class="material-icons" aria-hidden="true">folder_open</span></span>
+        <span class="tile-body">
+          <span class="tile-title">All Requests</span>
+          <span class="tile-text">View and manage all system-wide requests</span>
+        </span>
+        <span class="material-icons tile-chevron" aria-hidden="true">chevron_right</span>
       </a>
     </mat-card>
 
     <mat-card class="dashboard-card admin-card" tabindex="0">
       <a routerLink="/sponsorship-types" class="card-link">
-        <mat-card-header>
-          <mat-card-title>Sponsorship Types</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Configure and update sponsorship tiers</p>
-        </mat-card-content>
+        <span class="tile-icon"><span class="material-icons" aria-hidden="true">category</span></span>
+        <span class="tile-body">
+          <span class="tile-title">Sponsorship Types</span>
+          <span class="tile-text">Configure and update sponsorship tiers</span>
+        </span>
+        <span class="material-icons tile-chevron" aria-hidden="true">chevron_right</span>
       </a>
     </mat-card>
   }

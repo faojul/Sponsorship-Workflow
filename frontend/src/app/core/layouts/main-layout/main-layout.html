@@ -2,55 +2,95 @@
 
   <mat-sidenav
     #drawer
+    class="app-sidenav"
     [mode]="isMobile ? 'over' : 'side'"
     [opened]="!isMobile">
-    <mat-nav-list>
-      <a mat-list-item routerLink="/dashboard" (click)="isMobile && drawer.close()">Dashboard</a>
-      @if (authService.hasRole('Requestor')) { <a mat-list-item routerLink="/requests" (click)="isMobile && drawer.close()">My Requests</a> }
-      @if (authService.hasRole('Manager')) { <a mat-list-item routerLink="/manager-approvals" (click)="isMobile && drawer.close()">Manager Approvals</a> }
-      @if (authService.hasRole('FinanceAdmin')) { <a mat-list-item routerLink="/finance-approvals" (click)="isMobile && drawer.close()">Finance Approvals</a> }
+
+    <div class="sidenav-brand brand">
+      <span class="brand-mark">
+        <mat-icon>account_tree</mat-icon>
+      </span>
+      <span class="brand-name">Sponsorship Workflow</span>
+    </div>
+
+    <mat-nav-list class="app-nav">
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="is-active" (click)="isMobile && drawer.close()">
+        <mat-icon matListItemIcon>dashboard</mat-icon>
+        <span matListItemTitle>Dashboard</span>
+      </a>
+      @if (authService.hasRole('Requestor')) {
+        <a mat-list-item routerLink="/requests" routerLinkActive="is-active" (click)="isMobile && drawer.close()">
+          <mat-icon matListItemIcon>list_alt</mat-icon>
+          <span matListItemTitle>My Requests</span>
+        </a>
+      }
+      @if (authService.hasRole('Manager')) {
+        <a mat-list-item routerLink="/manager-approvals" routerLinkActive="is-active" (click)="isMobile && drawer.close()">
+          <mat-icon matListItemIcon>assignment_turned_in</mat-icon>
+          <span matListItemTitle>Manager Approvals</span>
+        </a>
+      }
+      @if (authService.hasRole('FinanceAdmin')) {
+        <a mat-list-item routerLink="/finance-approvals" routerLinkActive="is-active" (click)="isMobile && drawer.close()">
+          <mat-icon matListItemIcon>account_balance</mat-icon>
+          <span matListItemTitle>Finance Approvals</span>
+        </a>
+      }
       @if (authService.hasRole('SystemAdmin')) {
-        <a mat-list-item routerLink="/admin/requests" (click)="isMobile && drawer.close()">All Requests</a>
-        <a mat-list-item routerLink="/sponsorship-types" (click)="isMobile && drawer.close()">Sponsorship Types</a>
+        <a mat-list-item routerLink="/admin/requests" routerLinkActive="is-active" (click)="isMobile && drawer.close()">
+          <mat-icon matListItemIcon>folder_open</mat-icon>
+          <span matListItemTitle>All Requests</span>
+        </a>
+        <a mat-list-item routerLink="/sponsorship-types" routerLinkActive="is-active" (click)="isMobile && drawer.close()">
+          <mat-icon matListItemIcon>category</mat-icon>
+          <span matListItemTitle>Sponsorship Types</span>
+        </a>
       }
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content class="app-main">
 
-    <mat-toolbar color="primary">
-       @if (isMobile) {
+    <mat-toolbar class="app-toolbar">
+      @if (isMobile) {
         <button
           mat-icon-button
+          aria-label="Open navigation"
           (click)="drawer.toggle()">
 
           <mat-icon>menu</mat-icon>
 
         </button>
+        <span class="system-title">
+          Sponsorship Workflow
+        </span>
       }
-      <span class="system-title">
-        Sponsorship Workflow
-      </span>
       <span class="toolbar-spacer"></span>
 
-        @if (!isMobile && authService.currentUser(); as user) {
-    <div class="user-info">
-      <span class="user-email">{{ user.email }}</span>
-      <span class="user-role">({{ user.roles.join(', ') }})</span>
-    </div>
-  }
+      @if (!isMobile && authService.currentUser(); as user) {
+        <div class="user-info">
+          <span class="user-avatar" aria-hidden="true">{{ user.email.charAt(0) }}</span>
+          <span class="user-text">
+            <span class="user-email">{{ user.email }}</span>
+            <span class="user-role">{{ user.roles.join(', ') | humanize }}</span>
+          </span>
+        </div>
+      }
 
-        <button
-        mat-button
-        class="logout-btn"
+      <button
+        mat-stroked-button
+        class="logout-btn btn-neutral"
         (click)="logout()">
 
+        <mat-icon>logout</mat-icon>
         Logout
-        </button>
+      </button>
     </mat-toolbar>
 
     <div class="page-content">
-      <router-outlet></router-outlet>
+      <div class="page-inner">
+        <router-outlet></router-outlet>
+      </div>
     </div>
 
   </mat-sidenav-content>

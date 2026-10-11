@@ -1,11 +1,16 @@
-<mat-card>
+<header class="page-head">
+  <div>
+    <h1 class="page-title">All Sponsorship Requests</h1>
+    <p class="page-sub">Every sponsorship request in the system.</p>
+  </div>
+</header>
 
-  <h2>All Sponsorship Requests</h2>
+<mat-card class="panel">
 <div class="table-container">
   <table
     mat-table
     [dataSource]="requests"
-    class="full-width-table">
+    class="full-width-table data-table">
 
     <ng-container matColumnDef="title">
 
@@ -13,7 +18,7 @@
         Title
       </th>
 
-      <td mat-cell *matCellDef="let item">
+      <td mat-cell *matCellDef="let item" class="cell-strong">
         {{ item.title }}
       </td>
 
@@ -38,34 +43,34 @@
       </th>
 
       <td mat-cell *matCellDef="let item">
-        {{ item.status }}
+        <span class="chip" [attr.data-status]="item.status">{{ item.status | humanize }}</span>
       </td>
 
     </ng-container>
 
     <ng-container matColumnDef="amount">
 
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef class="num">
         Amount
       </th>
 
-      <td mat-cell *matCellDef="let item">
-        {{ item.requestedAmount }}
+      <td mat-cell *matCellDef="let item" class="num">
+        {{ item.requestedAmount | number:'1.0-2' }}
       </td>
 
     </ng-container>
 
     <ng-container matColumnDef="workflow">
 
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef class="col-actions">
         Workflow
       </th>
 
-      <td mat-cell *matCellDef="let item">
+      <td mat-cell *matCellDef="let item" class="col-actions">
 
         <button
-          mat-button
-          color="primary"
+          mat-stroked-button
+          class="btn-sm"
           [routerLink]="[
             '/workflow-history',
             item.id
@@ -89,6 +94,16 @@
         let row;
         columns: displayedColumns;
       ">
+    </tr>
+
+    <tr class="empty-row" *matNoDataRow>
+      <td [attr.colspan]="displayedColumns.length">
+        <div class="empty-state">
+          <span class="material-icons" aria-hidden="true">inbox</span>
+          <strong>No requests yet</strong>
+          Requests from all users will appear here.
+        </div>
+      </td>
     </tr>
 
   </table>

@@ -7,6 +7,7 @@ import { AuthService } from '../../auth/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatIconModule } from '@angular/material/icon';
+import { HumanizePipe } from '../../../shared/pipes/humanize-pipe';
 
 @Component({
   selector: 'app-main-layout',
@@ -16,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     RouterModule,
     MatButtonModule,
-    MatIconModule 
+    MatIconModule,
+    HumanizePipe
   ],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss'

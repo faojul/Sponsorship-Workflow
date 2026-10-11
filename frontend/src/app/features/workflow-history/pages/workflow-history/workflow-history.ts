@@ -20,12 +20,14 @@ import {
 }
 from '../../../sponsorship-requests/services/sponsorship-request';
 import { MatCardModule } from '@angular/material/card';
+import { HumanizePipe } from '../../../../shared/pipes/humanize-pipe';
 
 
 @Component({
   selector: 'app-workflow-history',
   imports: [   CommonModule,
-    MatCardModule],
+    MatCardModule,
+    HumanizePipe],
   templateUrl: './workflow-history.html',
   styleUrl: './workflow-history.scss',
 })

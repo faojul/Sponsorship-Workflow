@@ -1,23 +1,26 @@
-<mat-card>
+<header class="page-head">
+  <div>
+    <h1 class="page-title">My Requests</h1>
+    <p class="page-sub">Track and manage the sponsorship requests you have created.</p>
+  </div>
 
-  <div class="header">
-
-    <h2>My Requests</h2>
-
+  <div class="page-actions">
     <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       routerLink="/requests/create">
 
       Create Request
     </button>
-
   </div>
+</header>
+
+<mat-card class="panel">
 <div class="table-container">
   <table
   mat-table
   [dataSource]="requests || []"
-  class="full-width-table">
+  class="full-width-table data-table">
 
     <ng-container matColumnDef="title">
 
@@ -25,7 +28,7 @@
         Title
       </th>
 
-      <td mat-cell *matCellDef="let item">
+      <td mat-cell *matCellDef="let item" class="cell-strong">
         {{ item.title }}
       </td>
 
@@ -50,19 +53,19 @@
       </th>
 
       <td mat-cell *matCellDef="let item">
-        {{ item.status }}
+        <span class="chip" [attr.data-status]="item.status">{{ item.status | humanize }}</span>
       </td>
 
     </ng-container>
 
     <ng-container matColumnDef="amount">
 
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef class="num">
         Amount
       </th>
 
-      <td mat-cell *matCellDef="let item">
-        {{ item.requestedAmount }}
+      <td mat-cell *matCellDef="let item" class="num">
+        {{ item.requestedAmount | number:'1.0-2' }}
       </td>
 
     </ng-container>
@@ -84,7 +87,7 @@
         Event Date
       </th>
 
-      <td mat-cell *matCellDef="let item">
+      <td mat-cell *matCellDef="let item" class="cell-muted">
         {{ item.eventDate | date:'mediumDate'}}
       </td>
 
@@ -103,15 +106,16 @@
 </ng-container>
     <ng-container matColumnDef="actions">
 
-      <th mat-header-cell *matHeaderCellDef>
+      <th mat-header-cell *matHeaderCellDef class="col-actions">
         Actions
       </th>
 
-      <td mat-cell *matCellDef="let item">
+      <td mat-cell *matCellDef="let item" class="col-actions">
+        <div class="row-actions">
 @if (item.status === 'Draft') {
 <button
-  mat-button
-  color="accent"
+  mat-flat-button
+  class="btn-sm"
   (click)="submit(item.id)">
 
   Submit
@@ -119,13 +123,14 @@
 }
 @if (item.status === 'Draft' || item.status === 'PendingManagerApproval') {
 <button
-  mat-button
-  color="warn"
+  mat-stroked-button
+  class="btn-sm btn-danger"
   (click)="cancel(item.id)">
 
   Cancel
 </button>
 }
+        </div>
       </td>
 
     </ng-container>
@@ -138,6 +143,16 @@
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns;">
+    </tr>
+
+    <tr class="empty-row" *matNoDataRow>
+      <td [attr.colspan]="displayedColumns.length">
+        <div class="empty-state">
+          <span class="material-icons" aria-hidden="true">inbox</span>
+          <strong>No requests yet</strong>
+          Use Create Request to start your first one.
+        </div>
+      </td>
     </tr>
 
   </table>

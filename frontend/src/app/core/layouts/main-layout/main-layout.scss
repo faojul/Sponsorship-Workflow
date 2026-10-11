@@ -1,85 +1,87 @@
-// Main outermost page wrapper takes full screen real estate
+// Full-screen shell
 .layout-container {
   height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100%;
 }
 
-// Elevated header to create depth over the background layout
-.main-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Ensures content separation */
-  padding: 0 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: relative; /* Keeps toolbar components layered cleanly */
-  z-index: 10;
-  
-  .system-title {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-}
-
-// Creates clean space to push things to opposite sides
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-mat-sidenav {
-  width: auto;
-}
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-
-.logout-btn {
-  border: 1px solid rgb(58, 161, 168);
-  border-radius: 6px;
-
-  color: rgba(185, 15, 15, 0.842) !important;
- background-color: #f8f9fa;
-  padding: 0 16px;
-  height: 38px;
-
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: white;
-  }
-}
-
-// Global workspace layout container matching dashboard grid spacing
-.page-content {
-  background-color: #f8f9fa; // Soft material-neutral layout background tint
-  padding: 24px;
+// Sidebar brand block (shared .brand styles live in styles.scss)
+.sidenav-brand {
+  height: 60px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--wf-border);
   box-sizing: border-box;
-  min-height: calc(100vh - 64px); /* Fills screen space below a 64px toolbar */
 }
 
-mat-toolbar {
+// Column to the right of the sidebar: toolbar on top, content fills the rest
+mat-sidenav-content {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.system-title {
+  margin-left: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--wf-ink);
 }
 
 .user-info {
   display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 16px;
+}
+
+.user-avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--wf-blue-100);
+  color: var(--wf-blue-700);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.user-text {
+  display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  margin-right: 16px; /* Spacing before the logout button */
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .user-email {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
+  color: var(--wf-ink);
 }
 
 .user-role {
-  font-size: 11px;
-  opacity: 0.8;
+  font-size: 12px;
+  color: var(--wf-muted);
+}
+
+.logout-btn {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+// Content area
+.page-content {
+  flex: 1 0 auto;
+  box-sizing: border-box;
+  padding: 32px clamp(16px, 4vw, 40px) 48px;
+  background: var(--wf-bg);
+}
+
+.page-inner {
+  max-width: 1200px;
+  margin: 0 auto;
 }

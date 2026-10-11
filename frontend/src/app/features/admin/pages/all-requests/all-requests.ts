@@ -35,13 +35,16 @@ import {
 }
 from '../../../sponsorship-requests/services/sponsorship-request';
 
+import { HumanizePipe } from '../../../../shared/pipes/humanize-pipe';
+
 @Component({
   selector: 'app-all-requests',
   imports: [    CommonModule,
     RouterModule,
     MatTableModule,
     MatButtonModule,
-    MatCardModule],
+    MatCardModule,
+    HumanizePipe],
   templateUrl: './all-requests.html',
   styleUrl: './all-requests.scss',
 })

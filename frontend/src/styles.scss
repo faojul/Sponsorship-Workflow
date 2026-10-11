@@ -1,39 +1,422 @@
-
-// Include theming for Angular Material with `mat.theme()`.
-// This Sass mixin will define CSS variables that are used for styling Angular Material
-// components according to the Material 3 design spec.
-// Learn more about theming and how to use it for your application's
-// custom components at https://material.angular.dev/guide/theming
+// =====================================================================
+// Sponsorship Workflow: global theme and shared UI
+// Direction: corporate blue, minimal. Flat panels, hairline borders,
+// IBM Plex Sans. Page-specific layout lives in each component's scss.
+// =====================================================================
 @use '@angular/material' as mat;
 
 html {
   @include mat.theme((
     color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      primary: mat.$blue-palette,
+      tertiary: mat.$azure-palette,
     ),
-    typography: Roboto,
+    typography: (
+      plain-family: 'IBM Plex Sans',
+      brand-family: 'IBM Plex Sans',
+      bold-weight: 600,
+      medium-weight: 500,
+      regular-weight: 400,
+    ),
     density: 0,
   ));
 }
 
-body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
-  color-scheme: light;
+// ---------------------------------------------------------------------
+// 1. Design tokens (brand + Material system overrides)
+// ---------------------------------------------------------------------
+html {
+  --wf-font: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+  // Brand blue
+  --wf-blue-50: #F0F5FE;
+  --wf-blue-100: #DCE7FB;
+  --wf-blue-600: #1D5BD1;
+  --wf-blue-700: #1646A8;
+  --wf-navy-900: #0B1F3F;
 
-  // Reset the user agent margin.
-  margin: 0;
+  // Neutrals
+  --wf-bg: #F4F6FA;
+  --wf-surface: #FFFFFF;
+  --wf-surface-2: #F7F9FC;
+  --wf-ink: #0F1C33;
+  --wf-ink-2: #2B3A55;
+  --wf-muted: #52627A;
+  --wf-border: #DCE3ED;
+  --wf-border-soft: #E9EEF5;
+  --wf-border-strong: #B7C2D3;
+
+  // Semantic
+  --wf-danger: #B42318;
+  --wf-danger-bg: #FDE6E3;
+
+  // Material system variables -> corporate blue
+  --mat-sys-primary: #1D5BD1;
+  --mat-sys-on-primary: #FFFFFF;
+  --mat-sys-primary-container: #DCE7FB;
+  --mat-sys-on-primary-container: #0F2F73;
+  --mat-sys-secondary: #3B4D6B;
+  --mat-sys-on-secondary: #FFFFFF;
+  --mat-sys-secondary-container: #E6ECF6;
+  --mat-sys-on-secondary-container: #1B2A44;
+  --mat-sys-tertiary: #1D5BD1;
+  --mat-sys-on-tertiary: #FFFFFF;
+  --mat-sys-tertiary-container: #DCE7FB;
+  --mat-sys-on-tertiary-container: #0F2F73;
+  --mat-sys-error: #B42318;
+  --mat-sys-on-error: #FFFFFF;
+  --mat-sys-error-container: #FDE6E3;
+  --mat-sys-on-error-container: #7A1710;
+
+  --mat-sys-background: #F4F6FA;
+  --mat-sys-on-background: #0F1C33;
+  --mat-sys-surface: #FFFFFF;
+  --mat-sys-on-surface: #0F1C33;
+  --mat-sys-surface-variant: #EDF1F7;
+  --mat-sys-on-surface-variant: #52627A;
+  --mat-sys-surface-container-lowest: #FFFFFF;
+  --mat-sys-surface-container-low: #FFFFFF;
+  --mat-sys-surface-container: #F7F9FC;
+  --mat-sys-surface-container-high: #EEF2F8;
+  --mat-sys-surface-container-highest: #E6EBF3;
+  --mat-sys-outline: #8793A8;
+  --mat-sys-outline-variant: #DCE3ED;
+  --mat-sys-inverse-surface: #0B1F3F;
+  --mat-sys-inverse-on-surface: #F4F6FA;
+  --mat-sys-inverse-primary: #A9C3F7;
+
+  // Flat, quiet elevation (cards stay flat; overlays get a soft shadow)
+  --mat-sys-level1: 0 1px 2px rgba(15, 28, 51, 0.06);
+  --mat-sys-level2: 0 4px 12px rgba(15, 28, 51, 0.10);
+  --mat-sys-level3: 0 8px 24px rgba(15, 28, 51, 0.12);
+
+  // Shape: 8px controls, 12px panels
+  --mat-sys-corner-extra-small: 8px;
+  --mat-sys-corner-medium: 12px;
+  --mat-sys-corner-full: 8px;
+
+  // Slightly tighter form fields (ignored harmlessly if a token name differs)
+  --mat-form-field-container-height: 48px;
+  --mat-form-field-container-vertical-padding: 12px;
 }
-/* You can add global styles to this file, and also import other style files */
 
+// ---------------------------------------------------------------------
+// 2. Base
+// ---------------------------------------------------------------------
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  color-scheme: light;
+  margin: 0;
+  background-color: var(--wf-bg);
+  color: var(--wf-ink);
+  font: var(--mat-sys-body-medium);
+  font-family: var(--wf-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 { font-family: var(--wf-font); }
+
+.material-icons { user-select: none; }
+
+@keyframes wf-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+}
+
+// ---------------------------------------------------------------------
+// 3. Page structure (used by every page)
+// ---------------------------------------------------------------------
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--wf-ink);
+}
+
+.page-sub {
+  margin: 4px 0 0;
+  max-width: 60ch;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--wf-muted);
+}
+
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// Panels: flat, bordered surfaces (div or mat-card)
+.panel,
+mat-card.mat-mdc-card {
+  background: var(--wf-surface);
+  border: 1px solid var(--wf-border);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.panel { overflow: hidden; }
+.panel + .panel { margin-top: 16px; }
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+// ---------------------------------------------------------------------
+// 4. Data tables
+// ---------------------------------------------------------------------
+table.data-table {
+  width: 100%;
+  min-width: 720px;
+  background: transparent;
+
+  .mat-mdc-header-row { height: 44px; }
+
+  .mat-mdc-header-cell {
+    padding: 0 16px;
+    background: var(--wf-surface-2);
+    border-bottom: 1px solid var(--wf-border);
+    color: var(--wf-muted);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+
+  .mat-mdc-row {
+    height: 56px;
+    transition: background-color 0.12s ease;
+
+    &:hover { background: var(--wf-blue-50); }
+  }
+
+  .mat-mdc-cell {
+    padding: 0 16px;
+    border-bottom: 1px solid var(--wf-border-soft);
+    color: var(--wf-ink);
+    font-size: 14px;
+  }
+
+  .mat-mdc-row:last-child .mat-mdc-cell { border-bottom: 0; }
+
+  .cell-strong { font-weight: 500; }
+  .cell-muted { color: var(--wf-muted); }
+
+  .num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .col-actions { text-align: right; white-space: nowrap; }
+
+  .row-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  // Empty state row (fades in after a short delay so a fast load never flashes it)
+  .empty-row td { padding: 0; border: 0; }
+
+  .empty-state {
+    padding: 48px 16px;
+    text-align: center;
+    color: var(--wf-muted);
+    font-size: 14px;
+    animation: wf-fade-in 0.2s ease 0.6s both;
+
+    .material-icons {
+      display: block;
+      margin: 0 auto 8px;
+      font-size: 32px;
+      color: var(--wf-border-strong);
+    }
+
+    strong {
+      display: block;
+      color: var(--wf-ink);
+      font-weight: 500;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------
+// 5. Status chips (colour follows the status text; unknown = neutral)
+// ---------------------------------------------------------------------
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #EAEFF6;
+  color: #3D4C66;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &[data-status*='Cancel'] { background: #EDEFF3; color: #5A6578; }
+  &[data-status*='Approved'] { background: #DFF4E8; color: #0E6B3F; }
+  &[data-status*='Reject'] { background: #FDE6E3; color: #A3231A; }
+  &[data-status^='Pending'] { background: #FFF0D1; color: #8A4B00; }
+}
+
+// ---------------------------------------------------------------------
+// 6. Buttons
+// ---------------------------------------------------------------------
+button.mat-mdc-button-base.btn-sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+button.mat-mdc-button-base.btn-neutral:not(:disabled) {
+  color: var(--wf-ink-2);
+}
+
+button.mat-mdc-outlined-button.btn-neutral:not(:disabled) {
+  border-color: var(--wf-border-strong);
+
+  &:hover { background: var(--wf-surface-2); }
+}
+
+button.mat-mdc-button-base.btn-danger:not(:disabled) {
+  color: var(--wf-danger);
+}
+
+button.mat-mdc-outlined-button.btn-danger:not(:disabled) {
+  border-color: #E9B5AE;
+
+  &:hover { background: var(--wf-danger-bg); }
+}
+
+// ---------------------------------------------------------------------
+// 7. App shell (sidenav, navigation, toolbar)
+// ---------------------------------------------------------------------
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  background: var(--wf-blue-600);
+  color: #FFFFFF;
+
+  .mat-icon,
+  .material-icons {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.005em;
+  color: var(--wf-ink);
+}
+
+mat-sidenav.app-sidenav {
+  width: 248px;
+  border-right: 1px solid var(--wf-border);
+  border-radius: 0;
+  background: var(--wf-surface);
+}
+
+mat-sidenav-content.app-main { background: var(--wf-bg); }
+
+mat-nav-list.app-nav {
+  padding: 8px 12px 16px;
+
+  a.mat-mdc-list-item {
+    height: 44px;
+    margin-bottom: 2px;
+    border-radius: 8px;
+    transition: background-color 0.12s ease;
+
+    .mdc-list-item__primary-text {
+      color: var(--wf-ink-2);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .mat-icon {
+      color: var(--wf-muted);
+    }
+
+    &:hover { background: var(--wf-surface-2); }
+
+    &.is-active {
+      background: var(--wf-blue-50);
+
+      .mdc-list-item__primary-text { color: var(--wf-blue-700); font-weight: 600; }
+      .mat-icon { color: var(--wf-blue-600); }
+    }
+  }
+}
+
+mat-toolbar.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  flex: none;
+  height: 60px;
+  padding: 0 24px;
+  background: var(--wf-surface);
+  color: var(--wf-ink);
+  border-bottom: 1px solid var(--wf-border);
+}
+
+// ---------------------------------------------------------------------
+// 8. Snackbars
+// ---------------------------------------------------------------------
+.mat-mdc-snack-bar-container.error-snackbar {
+  --mat-snack-bar-container-color: #8F1D14;
+  --mat-snack-bar-supporting-text-color: #FFFFFF;
+  --mat-snack-bar-button-color: #FFFFFF;
+
+  .mdc-snackbar__surface { background-color: #8F1D14; }
+}

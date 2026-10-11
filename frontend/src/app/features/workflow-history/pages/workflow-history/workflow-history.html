@@ -1,4 +1,9 @@
-<h2>Workflow History</h2>
+<header class="page-head">
+  <div>
+    <h1 class="page-title">Workflow History</h1>
+    <p class="page-sub">Every status change recorded for this request.</p>
+  </div>
+</header>
 
 <div
   class="history-container">
@@ -8,54 +13,54 @@
     track item.id
   ) {
 
-    <mat-card class="history-card">
+    <div class="history-item">
 
-      <p>
+      <span class="history-dot"></span>
 
-        <strong>Action:</strong>
-        {{ item.action }}
+      <mat-card class="history-card">
 
-      </p>
+        <div class="history-head">
 
-      <p>
+          <h2 class="history-action">{{ item.action }}</h2>
 
-        <strong>From Status:</strong>
-        {{ item.previousStatus }}
+          <time class="history-date">{{ item.performedAtUtc | date:'medium'}}</time>
 
-      </p>
+        </div>
 
-      <p>
+        <div class="history-transition">
 
-        <strong>To Status:</strong>
-        {{ item.newStatus }}
+          @if (item.previousStatus) {
+            <span class="chip" [attr.data-status]="item.previousStatus">{{ item.previousStatus | humanize }}</span>
+            <span class="material-icons history-arrow" aria-hidden="true">east</span>
+          }
 
-      </p>
+          <span class="chip" [attr.data-status]="item.newStatus">{{ item.newStatus | humanize }}</span>
 
-      <p>
+        </div>
 
-        <strong>Remarks:</strong>
-        {{ item.remarks }}
+        @if (item.remarks) {
+          <p class="history-remarks">
 
-      </p>
+            <span class="history-label">Remarks</span>
+            {{ item.remarks }}
 
-      <p>
+          </p>
+        }
 
-        <strong>Performed By:</strong>
-        {{ item.performedByUserName }}
+        <p class="history-by">
 
-      </p>
+          <span class="history-label">Performed By</span>
+          {{ item.performedByUserName }}
 
-      <p>
+        </p>
 
-        <strong>Date:</strong>
-        {{ item.performedAtUtc | date:'medium'}}
+      </mat-card>
 
-      </p>
-
-    </mat-card>
+    </div>
   } @empty {
   <!-- This renders automatically if the history array is null, undefined, or empty -->
   <mat-card class="history-card empty-message">
+    <span class="material-icons" aria-hidden="true">history</span>
     <p>
       <strong>No Workflow history for this item.</strong> <br>
       <i>Draft items do not have any workflow. The workflow starts after submission.</i>

@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 
+import { HumanizePipe } from '../../../../shared/pipes/humanize-pipe';
+
 import { SponsorshipRequestService }
 from '../../services/sponsorship-request';
 
@@ -18,7 +20,8 @@ from '../../services/sponsorship-request';
     MatTableModule,
     MatButtonModule,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    HumanizePipe
   ],
   templateUrl: './request-list.html',
   styleUrl: './request-list.scss',

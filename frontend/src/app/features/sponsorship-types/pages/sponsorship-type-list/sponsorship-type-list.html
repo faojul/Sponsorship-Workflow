@@ -1,33 +1,44 @@
-<h2>Sponsorship Types</h2>
+<header class="page-head">
+  <div>
+    <h1 class="page-title">Sponsorship Types</h1>
+    <p class="page-sub">Manage the types requestors can choose from.</p>
+  </div>
+</header>
 
-<div class="top-bar">
+<div class="panel add-panel">
 
-  <mat-form-field appearance="outline">
+  <div class="top-bar">
 
-    <mat-label>
-      New Type Name
-    </mat-label>
+    <mat-form-field appearance="outline" class="new-type" subscriptSizing="dynamic">
 
-    <input
-      matInput
-      [(ngModel)]="newName">
+      <mat-label>
+        New Type Name
+      </mat-label>
 
-  </mat-form-field>
+      <input
+        matInput
+        [(ngModel)]="newName">
 
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="add()">
+    </mat-form-field>
 
-    Add
-  </button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="add()">
+
+      Add
+    </button>
+
+  </div>
 
 </div>
+
+<div class="panel">
 <div class="table-container">
 <table
   mat-table
   [dataSource]="types"
-  class="full-width-table">
+  class="full-width-table data-table">
 
   <ng-container matColumnDef="name">
 
@@ -39,7 +50,8 @@
 
   <mat-form-field
     appearance="outline"
-    class="type-input">
+    class="type-input"
+    subscriptSizing="dynamic">
 
     <input
       matInput
@@ -53,27 +65,31 @@
 
   <ng-container matColumnDef="actions">
 
-    <th mat-header-cell *matHeaderCellDef>
+    <th mat-header-cell *matHeaderCellDef class="col-actions">
       Actions
     </th>
 
-    <td mat-cell *matCellDef="let item">
+    <td mat-cell *matCellDef="let item" class="col-actions">
 
-      <button
-        mat-button
-        color="primary"
-        (click)="update(item)">
+      <div class="row-actions">
 
-        Update
-      </button>
+        <button
+          mat-stroked-button
+          class="btn-sm"
+          (click)="update(item)">
 
-      <button
-        mat-button
-        color="warn"
-        (click)="delete(item.id)">
+          Update
+        </button>
 
-        Delete
-      </button>
+        <button
+          mat-stroked-button
+          class="btn-sm btn-danger"
+          (click)="delete(item.id)">
+
+          Delete
+        </button>
+
+      </div>
 
     </td>
 
@@ -92,5 +108,16 @@
     ">
   </tr>
 
+  <tr class="empty-row" *matNoDataRow>
+    <td [attr.colspan]="displayedColumns.length">
+      <div class="empty-state">
+        <span class="material-icons" aria-hidden="true">category</span>
+        <strong>No sponsorship types yet</strong>
+        Add the first type using the field above.
+      </div>
+    </td>
+  </tr>
+
 </table>
+</div>
 </div>

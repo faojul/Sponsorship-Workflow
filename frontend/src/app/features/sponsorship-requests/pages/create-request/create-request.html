@@ -1,157 +1,196 @@
-<mat-card>
+<header class="page-head">
+  <div>
+    <h1 class="page-title">Create Sponsorship Request</h1>
+    <p class="page-sub">Fill in the details. You can save a draft and submit it later from My Requests.</p>
+  </div>
+</header>
 
-  <h2>Create Sponsorship Request</h2>
+<mat-card class="form-card">
 
   <form [formGroup]="form">
 
-    <div class="grid">
+    <section class="form-section">
 
-      <mat-form-field appearance="outline">
+      <div class="section-intro">
+        <h2 class="section-title">Request details</h2>
+        <p>Name the request and choose its sponsorship type.</p>
+      </div>
 
-        <mat-label>
-          Title
-        </mat-label>
+      <div class="grid">
 
-        <input
-          matInput
-          formControlName="title">
+        <mat-form-field appearance="outline" class="span-2" subscriptSizing="dynamic">
 
-      </mat-form-field>
+          <mat-label>
+            Title
+          </mat-label>
 
-      <mat-form-field appearance="outline">
+          <input
+            matInput
+            formControlName="title">
 
-        <mat-label>
-          Department
-        </mat-label>
+        </mat-form-field>
 
-        <input
-          matInput
-          formControlName="department">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
 
-      </mat-form-field>
+          <mat-label>
+            Department
+          </mat-label>
 
-      <mat-form-field appearance="outline">
+          <input
+            matInput
+            formControlName="department">
 
-        <mat-label>
-          Sponsorship Type
-        </mat-label>
+        </mat-form-field>
 
-        <mat-select
-          formControlName="sponsorshipTypeId">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
 
-          @for (
-            item of sponsorshipTypes;
-            track item.id
-          ) {
+          <mat-label>
+            Sponsorship Type
+          </mat-label>
 
-            <mat-option
-              [value]="item.id">
+          <mat-select
+            formControlName="sponsorshipTypeId">
 
-              {{ item.name }}
+            @for (
+              item of sponsorshipTypes;
+              track item.id
+            ) {
 
-            </mat-option>
-          }
+              <mat-option
+                [value]="item.id">
 
-        </mat-select>
+                {{ item.name }}
 
-      </mat-form-field>
+              </mat-option>
+            }
 
-      <mat-form-field appearance="outline">
+          </mat-select>
 
-        <mat-label>
-          Event Name
-        </mat-label>
+        </mat-form-field>
 
-        <input
-          matInput
-          formControlName="eventName">
+      </div>
 
-      </mat-form-field>
+    </section>
 
-<mat-form-field appearance="outline">
-  <mat-label>Event Date</mat-label>
-  
-  <!-- Add [matDatepicker] directive to the input -->
-  <input 
-    matInput 
-    [matDatepicker]="picker" 
-    formControlName="eventDate">
-  
-  <!-- Add a toggle icon inside the form field -->
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  
-  <!-- Add the actual calendar popup element -->
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
+    <section class="form-section">
 
+      <div class="section-intro">
+        <h2 class="section-title">Event</h2>
+        <p>Which event is being sponsored, when it takes place, and the amount requested.</p>
+      </div>
 
-      <mat-form-field appearance="outline">
+      <div class="grid">
 
-        <mat-label>
-          Requested Amount
-        </mat-label>
+        <mat-form-field appearance="outline" class="span-2" subscriptSizing="dynamic">
 
-        <input
-          matInput
-          type="number"
-          formControlName="requestedAmount">
+          <mat-label>
+            Event Name
+          </mat-label>
 
-      </mat-form-field>
+          <input
+            matInput
+            formControlName="eventName">
 
-    </div>
+        </mat-form-field>
 
-    <mat-form-field
-      appearance="outline"
-      class="full-width">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Event Date</mat-label>
 
-      <mat-label>
-        Purpose
-      </mat-label>
+          <!-- Add [matDatepicker] directive to the input -->
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="eventDate">
 
-      <textarea
-        matInput
-        rows="4"
-        formControlName="purpose">
-      </textarea>
+          <!-- Add a toggle icon inside the form field -->
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
 
-    </mat-form-field>
+          <!-- Add the actual calendar popup element -->
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field
-      appearance="outline"
-      class="full-width">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
 
-      <mat-label>
-        Expected Business Benefit
-      </mat-label>
+          <mat-label>
+            Requested Amount
+          </mat-label>
 
-      <textarea
-        matInput
-        rows="3"
-        formControlName="expectedBusinessBenefit">
-      </textarea>
+          <input
+            matInput
+            type="number"
+            formControlName="requestedAmount">
 
-    </mat-form-field>
+        </mat-form-field>
 
-    <mat-form-field
-      appearance="outline"
-      class="full-width">
+      </div>
 
-      <mat-label>
-        Remarks
-      </mat-label>
+    </section>
 
-      <textarea
-        matInput
-        rows="3"
-        formControlName="remarks">
-      </textarea>
+    <section class="form-section">
 
-    </mat-form-field>
+      <div class="section-intro">
+        <h2 class="section-title">Justification</h2>
+        <p>Explain the purpose and the benefit you expect for the business.</p>
+      </div>
+
+      <div class="stack">
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          subscriptSizing="dynamic">
+
+          <mat-label>
+            Purpose
+          </mat-label>
+
+          <textarea
+            matInput
+            rows="4"
+            formControlName="purpose"></textarea>
+
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          subscriptSizing="dynamic">
+
+          <mat-label>
+            Expected Business Benefit
+          </mat-label>
+
+          <textarea
+            matInput
+            rows="3"
+            formControlName="expectedBusinessBenefit"></textarea>
+
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          subscriptSizing="dynamic">
+
+          <mat-label>
+            Remarks
+          </mat-label>
+
+          <textarea
+            matInput
+            rows="3"
+            formControlName="remarks"></textarea>
+
+        </mat-form-field>
+
+      </div>
+
+    </section>
 
     <div class="actions">
 
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
         (click)="saveDraft()">
 

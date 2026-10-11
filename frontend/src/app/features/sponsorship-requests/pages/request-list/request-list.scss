@@ -1,11 +1,4 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.table-container {
-  overflow-x: auto;
+/* Layout, table, chip and button styles are shared; see src/styles.scss */
+.full-width-table {
   width: 100%;
 }

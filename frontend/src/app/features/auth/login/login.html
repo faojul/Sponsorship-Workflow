@@ -1,7 +1,4 @@
 <div class="page-wrapper">
-  
-  <!-- Title explicitly placed at the top -->
-  <h1 class="page-title">Sponsorship Workflow Login</h1>
 
   <!-- Full Screen Loading Overlay -->
   @if (isLoading) {
@@ -16,44 +13,98 @@
     </div>
   }
 
-  <!-- Center Content Area for Cards -->
-  <div class="login-container">
+  <!-- Brand panel: what the product does, in the order it happens -->
+  <aside class="brand-panel">
+    <div class="brand">
+      <span class="brand-mark">
+        <span class="material-icons" aria-hidden="true">account_tree</span>
+      </span>
+      <span class="brand-name">Sponsorship Workflow</span>
+    </div>
 
-    <!-- Main Login Card -->
-    <mat-card class="login-card">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email">
-        </mat-form-field>
+    <div class="brand-copy">
+      <h2 class="brand-headline">Every sponsorship request, from draft to final approval.</h2>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password">
-        </mat-form-field>
+      <ol class="stages">
+        <li>
+          <strong>Draft</strong>
+          <span>A requestor prepares the request and submits it.</span>
+        </li>
+        <li>
+          <strong>Manager approval</strong>
+          <span>The manager approves or rejects it.</span>
+        </li>
+        <li>
+          <strong>Finance review</strong>
+          <span>Finance gives the final decision.</span>
+        </li>
+      </ol>
 
-        <button
-          mat-raised-button
-          color="primary"
-          class="full-width"
-          [disabled]="isLoading">
-          @if (!isLoading) {
-            <span>Login</span>
-          } @else {
-            <span>Initializing Server...</span>
-          }
-        </button>
-      </form>
-    </mat-card>
+      <p class="brand-note">Every status change is recorded in the workflow history.</p>
+    </div>
+  </aside>
 
-    <!-- Seed Data Test Accounts Card -->
-    <mat-card class="seed-card">
-      <h3>Test Accounts</h3>
-      <p><strong>Requestor</strong><br>requestor@test.com<br>Test123!</p>
-      <p><strong>Manager</strong><br>manager@test.com<br>Test123!</p>
-      <p><strong>Finance Admin</strong><br>finance@test.com<br>Test123!</p>
-      <p><strong>System Admin</strong><br>admin@test.com<br>Test123!</p>
-    </mat-card>
+  <!-- Form panel -->
+  <main class="form-panel">
+    <div class="form-wrap">
 
-  </div>
+      <h1 class="form-title">Login</h1>
+      <p class="form-sub">Sign in to Sponsorship Workflow.</p>
+
+      <!-- Main Login Card -->
+      <mat-card class="login-card">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width" subscriptSizing="dynamic">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width" subscriptSizing="dynamic">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+
+          <button
+            mat-flat-button
+            color="primary"
+            class="full-width submit-btn"
+            [disabled]="isLoading">
+            @if (!isLoading) {
+              <span>Login</span>
+            } @else {
+              <span>Initializing Server...</span>
+            }
+          </button>
+        </form>
+      </mat-card>
+
+      <!-- Seed Data Test Accounts Card -->
+      <mat-card class="seed-card">
+        <h3>Test Accounts</h3>
+        <ul class="seed-list">
+          <li>
+            <strong>Requestor</strong>
+            <span>requestor@test.com</span>
+            <span>Test123!</span>
+          </li>
+          <li>
+            <strong>Manager</strong>
+            <span>manager@test.com</span>
+            <span>Test123!</span>
+          </li>
+          <li>
+            <strong>Finance Admin</strong>
+            <span>finance@test.com</span>
+            <span>Test123!</span>
+          </li>
+          <li>
+            <strong>System Admin</strong>
+            <span>admin@test.com</span>
+            <span>Test123!</span>
+          </li>
+        </ul>
+      </mat-card>
+
+    </div>
+  </main>
 </div>
