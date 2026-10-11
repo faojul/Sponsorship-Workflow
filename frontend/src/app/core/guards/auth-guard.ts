@@ -53,32 +53,3 @@ CanActivateChildFn = () => {
 
   return checkAuth();
 };
-
-
-function hasValidToken(token: string | null): boolean {
-
-  if (!token) {
-    return false;
-  }
-
-  try {
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return Date.now() < payload.exp * 1000;
-  } catch {
-    return false;
-  }
-}
-
-// For the login page: a user who already has a valid session goes to the dashboard
-export const guestGuard:
-CanActivateFn = () => {
-
-  const authService = inject(AuthService);
-  const router = inject(Router);
-
-  if (hasValidToken(authService.getToken())) {
-    return router.createUrlTree(['/dashboard']);
-  }
-
-  return true;
-};

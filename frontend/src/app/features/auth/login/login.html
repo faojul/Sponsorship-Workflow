@@ -84,23 +84,95 @@
         <ul class="seed-list">
           <li>
             <strong>Requestor</strong>
-            <span>requestor@test.com</span>
-            <span>Test123!</span>
+            <span class="seed-cred">
+              <span class="seed-text">requestor@test.com</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy email"
+                (click)="copy('requestor@test.com', 'requestor-email')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'requestor-email' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
+            <span class="seed-cred">
+              <span class="seed-text">Test123!</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy password"
+                (click)="copy('Test123!', 'requestor-password')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'requestor-password' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
           </li>
           <li>
             <strong>Manager</strong>
-            <span>manager@test.com</span>
-            <span>Test123!</span>
+            <span class="seed-cred">
+              <span class="seed-text">manager@test.com</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy email"
+                (click)="copy('manager@test.com', 'manager-email')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'manager-email' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
+            <span class="seed-cred">
+              <span class="seed-text">Test123!</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy password"
+                (click)="copy('Test123!', 'manager-password')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'manager-password' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
           </li>
           <li>
             <strong>Finance Admin</strong>
-            <span>finance@test.com</span>
-            <span>Test123!</span>
+            <span class="seed-cred">
+              <span class="seed-text">finance@test.com</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy email"
+                (click)="copy('finance@test.com', 'finance-email')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'finance-email' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
+            <span class="seed-cred">
+              <span class="seed-text">Test123!</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy password"
+                (click)="copy('Test123!', 'finance-password')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'finance-password' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
           </li>
           <li>
             <strong>System Admin</strong>
-            <span>admin@test.com</span>
-            <span>Test123!</span>
+            <span class="seed-cred">
+              <span class="seed-text">admin@test.com</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy email"
+                (click)="copy('admin@test.com', 'admin-email')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'admin-email' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
+            <span class="seed-cred">
+              <span class="seed-text">Test123!</span>
+              <button
+                type="button"
+                class="copy-btn"
+                aria-label="Copy password"
+                (click)="copy('Test123!', 'admin-password')">
+                <span class="material-icons" aria-hidden="true">{{ copied === 'admin-password' ? 'check' : 'content_copy' }}</span>
+              </button>
+            </span>
           </li>
         </ul>
       </mat-card>

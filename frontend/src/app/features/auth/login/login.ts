@@ -35,11 +35,29 @@ export class Login {
   private snackBar = inject(MatSnackBar);
   private cdr = inject(ChangeDetectorRef);
   isLoading = false;
+  copied: string | null = null;
 
   form = this.fb.group({
     email: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
+
+  // Copies a test-account value exactly as shown (no stray spaces)
+  copy(value: string, key: string): void {
+
+    navigator.clipboard.writeText(value).then(() => {
+
+      this.copied = key;
+      this.cdr.markForCheck();
+
+      setTimeout(() => {
+        this.copied = null;
+        this.cdr.markForCheck();
+      }, 1500);
+    }).catch(() => {
+      this.snackBar.open('Could not copy', 'Close', { duration: 2000 });
+    });
+  }
 
   onSubmit(): void {
 
@@ -50,13 +68,13 @@ export class Login {
     this.isLoading = true;
 
     this.authService.login({
-      email: this.form.value.email!,
+      email: this.form.value.email!.trim(),
       password: this.form.value.password!
     }).subscribe({
       next: () => {
         this.isLoading = false;
         this.cdr.markForCheck();
-        this.router.navigate(['/dashboard'], { replaceUrl: true });
+        this.router.navigate(['/dashboard']);
       },
       error: error => {
 

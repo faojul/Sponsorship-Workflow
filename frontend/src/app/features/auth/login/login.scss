@@ -163,8 +163,8 @@
 
 .seed-list li {
   display: grid;
-  grid-template-columns: 96px 1fr auto;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 16px;
   padding: 8px 0;
   border-top: 1px solid var(--wf-border-soft);
   font-size: 13px;
@@ -172,8 +172,52 @@
 }
 
 .seed-list strong {
+  grid-column: 1 / -1;
   font-weight: 500;
   color: var(--wf-ink);
+}
+
+.seed-cred {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* One click or double click selects the whole value, not just a word */
+.seed-text {
+  -webkit-user-select: all;
+  user-select: all;
+  overflow-wrap: anywhere;
+}
+
+.copy-btn {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--wf-muted);
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.copy-btn .material-icons {
+  font-size: 16px;
+}
+
+.copy-btn:hover {
+  background: var(--wf-blue-50);
+  color: var(--wf-blue-700);
+}
+
+.copy-btn:focus-visible {
+  outline: 2px solid var(--wf-blue-600);
+  outline-offset: 1px;
 }
 
 /* ---------- Loading overlay ---------- */
