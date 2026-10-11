@@ -56,7 +56,7 @@ export class Login {
       next: () => {
         this.isLoading = false;
         this.cdr.markForCheck();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/dashboard'], { replaceUrl: true });
       },
       error: error => {
 
