@@ -9,7 +9,10 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = authService.getToken();
 
-  if (token) {
+  // Never send a previous session's token with the login request itself.
+  const isLoginRequest = req.url.toLowerCase().endsWith('/auth/login');
+
+  if (token && !isLoginRequest) {
 
     req = req.clone({
       setHeaders: {
